@@ -9,6 +9,8 @@ By Nilanjan Mitra August 2021 nmitra1@jhu.edu
 RameshV2 is a set of files for implementation of the Integrative model within Uintah. 
 This integrative model was built as part of the MEDE collaboration effort and includes the mechanism of fracture, amorphization, granular flow. 
 This is ideal for modeling brittle ceramics like Boron Carbide.
+RameshV3 is another implementtaion of the integrative model in which the mechanisms of Large deformation subgrain plasticity is present instead of amorphization.
+This is ideal for modeling brittle ceramics such as Silicon Carbide.
 
 Folder RameshV2 and Ramesh V3 is to be added to ..../src/CCA/Components/MPM/Materials/ConstitutiveModel
 
@@ -20,7 +22,9 @@ the file constitutive_models.xml is to be updated into ..../src/StandAlone/input
 
 
 
--------------------------- These are not implemented in this version of NARWHAL -----------------------------------------------------------------
+-------------------------- These are not implemented in this version of UPLOAD -----------------------------------------------------------------
+------ If in case there are issues in compilation, the person doing the compilation may have to turn of switches for these other constitutive models as described below. 
+The current working implementation has all the models in it which includes the ceramic models as well as the brain models (which can also be used ofr modeling of soft polymers)
 
 -----------------------------------------------------------------------------------------------------------------------------------
 -------------Brain modeling implementation/changes ----------------------------------------------------------------------
