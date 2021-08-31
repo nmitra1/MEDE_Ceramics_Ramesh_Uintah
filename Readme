@@ -1,0 +1,65 @@
+Please follow this prior to compilation ....
+These are in addition to the Uintah 2.6 version obtained via svn/git.
+
+By Nilanjan Mitra August 2021 nmitra1@jhu.edu
+
+------------------------------------------------------------------------------------------------------------------------------------
+------- Ceramic model implementations/changes ------------------------------------------------------------------------
+
+RameshV2 is a set of files for implementation of the Integrative model within Uintah. 
+This integrative model was built as part of the MEDE collaboration effort and includes the mechanism of fracture, amorphization, granular flow. 
+This is ideal for modeling brittle ceramics like Boron Carbide.
+
+Folder RameshV2 and Ramesh V3 is to be added to ..../src/CCA/Components/MPM/Materials/ConstitutiveModel
+
+The sub.mk file, ConstitutiveModelFactory.cc is also to be updated in that same place. Infact it just updates the link to the RameshV2 and V3 folder.
+
+the file constitutive_models.xml is to be updated into ..../src/StandAlone/inputs/UPS_SPEC
+
+
+
+
+
+-------------------------- These are not implemented in this version of NARWHAL -----------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------
+-------------Brain modeling implementation/changes ----------------------------------------------------------------------
+
+Updates on changes to UINTAH for brain simulations
+Updated by Ahmed Alshareef and Kshitiz Upadhyay
+
+There is a set of files that need to be updated within UINTAH to run the brain simulations. The four main changes are:
+1) to be to apply a kinematic boundary condition on only one part, rather than all particles in the model.
+2) anisotropic constitutive models that take in a fiber direction and dispersion measure ("FA" value).
+3) a new constitutive model - Quasi-linear Viscoelastic, Anisotropic Holzapfel-Gasser-Ogden (HGO) model. See (Ganpule et al. 2017 - J. Neurotrauma) and (Gasser et al. 2006 - J .R. Soc. Interface)
+4) a new constitutive model - an Isotropic Nonlinear Visco-hyperelastic model. See (Upadhyay et al. 2020 - J. Mech. Phys. Solids)
+
+For change [1] and [2], the following files need to be updated:
+ - SingleVelContact.cc  (....\src\CCA\Components\MPM\Materials\Contact)
+ - ParticleCreator.cc   (....\src\CCA\Components\MPM\Materials\ParticleCreator)
+ - ParticleCreator.h    (....\src\CCA\Components\MPM\Materials\ParticleCreator)
+ - MPMFlags.cc          (....\src\CCA\Components\MPM\Core)
+ - MPMFlags.h           (....\src\CCA\Components\MPM\Core)
+ - SerialMPM.cc         (....\src\CCA\Components\MPM)
+ - ConstitutiveModel.cc (....\src\CCA\Components\MPM\Materials\ConstitutiveModel)
+ - ConstitutiveModel.h  (....\src\CCA\Components\MPM\Materials\ConstitutiveModel)
+ - FileGeometryPiece.cc (....\src\Core\GeometryPiece)
+ - FileGeometryPiece.h  (....\src\Core\GeometryPiece)
+ - SmoothGeomPiece.cc   (....\src\Core\GeometryPiece)
+ - SmoothGeomPiece.h    (....\src\Core\GeometryPiece)
+ - MPMLabel.cc          (....\src\CCA\Components\MPM\Core)
+ - MPMLabel.h           (....\src\CCA\Components\MPM\Core)
+ - Pfs.cc               (....\src\StandAlone\tools\pfs)
+ - Pfs2.cc              (....\src\StandAlone\tools\pfs)
+ - ImpMPM.cc            (....\src\CCA\Components\MPM)
+ - Mpm_spec.xml         (....\src\StandAlone\inputs\UPS_SPEC)
+ - Ups_spec.xml         (....\src\StandAlone\inputs\UPS_SPEC)
+ 
+For change [3], the files "HGOC.cc" and "HGOC.h" need to be added to the (..../src/CCA/Components/MPM/Materials/ConstitutiveModel) folder .
+For change [4], the files "CompOgUSS.cc" and "CompOgUSS.h", "CompGent.cc and .h", "CompGUSS.cc and .h" need to be added to the "ConstitutiveModel" folder listed above.
+  - Both changes also require changes to the "sub.mk" and "ConstitutiveModelFactory.cc" in the same folder to update links and model inputs as described above. 
+  - An additional change to the "Constitutive_model.xml" file in (..../src/StandAlone/inputs/UPS_SPEC) folder is also required. 
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+The current compiled version has all the above models built in it.
